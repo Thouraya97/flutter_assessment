@@ -114,6 +114,7 @@ class _ContactDetailScreenState extends State<ContactDetailScreen> {
                         )
                     ),
                     SizedBox(height: 50,),
+                    //the share button 
                      Builder(
                           builder: (BuildContext context) {
                             return RaisedButton(
@@ -135,6 +136,7 @@ class _ContactDetailScreenState extends State<ContactDetailScreen> {
       ),
     );
   }
+  //this methode will allows us to share user info on more installed applications
   _onShareData(BuildContext context) async {
 
     final RenderBox box = context.findRenderObject();

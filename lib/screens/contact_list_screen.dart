@@ -24,7 +24,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
 String message = "";
 
   
-
+//loading data from the local json file
   Future<List<Contact>> readJsonFile() async {
     final String response = await rootBundle.loadString('assets/contacts.json');
     final contactData = await json.decode(response);
@@ -34,6 +34,7 @@ String message = "";
     
       contacts = list.map((e) => Contact.fromJson(e)).toList();
           
+          // sorting data by check-in date 
         contacts.sort((a, b){ 
     return DateFormat("yyyy-MM-dd HH:mm:ss").parse(a.check_in).compareTo(DateFormat("yyyy-MM-dd HH:mm:ss").parse(b.check_in));
 });
@@ -41,6 +42,8 @@ String message = "";
 
 return contacts ; 
   }
+
+  //indicator of the end of the list
   _scrollListener() {
   if (_controller.offset >= _controller.position.maxScrollExtent &&
         !_controller.position.outOfRange) {
@@ -67,6 +70,8 @@ _controller = ScrollController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //this floating action button will control the time mode eithe TimeAgo 
+      //or the original time format
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color(0xff000137),
         onPressed: () {
@@ -139,6 +144,7 @@ _controller = ScrollController();
                             ),
                           ],
                         ),
+                        //a click on a tile will take us to the details of a user
                         onTap: () {
                           Navigator.of(context).pushNamed(
                               ContactDetailScreen.routeName,
